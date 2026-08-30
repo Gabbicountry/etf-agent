@@ -5,13 +5,13 @@ import os
 import sys
 
 def send_email():
-    sender_email = os.environ.get("GMAIL_USER")
-    app_password = os.environ.get("GMAIL_APP_PASSWORD")
+    # 등록하신 시크릿 이름(EMAIL_USER, EMAIL_PASSWORD)에 맞게 수정
+    sender_email = os.environ.get("EMAIL_USER")
+    app_password = os.environ.get("EMAIL_PASSWORD")
     wife_email = os.environ.get("WIFE_EMAIL")
     
-    # 시크릿 설정 누락 확인
     if not sender_email or not app_password:
-        print("❌ 에러: GMAIL_USER 또는 GMAIL_APP_PASSWORD 깃허브 시크릿이 설정되지 않았습니다.")
+        print("❌ 에러: EMAIL_USER 또는 EMAIL_PASSWORD 시크릿을 불러오지 못했습니다.")
         sys.exit(1)
         
     music_list = """
@@ -49,7 +49,7 @@ def send_email():
         print("✨ 이메일 전송 성공!")
     except Exception as e:
         print(f"❌ 이메일 전송 실패: {e}")
-        sys.exit(1)  # 전송 실패 시 깃허브 액션을 확실히 실패로 처리
+        sys.exit(1)
 
 if __name__ == "__main__":
     send_email()
