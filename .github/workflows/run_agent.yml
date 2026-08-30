@@ -1,0 +1,32 @@
+YAML
+name: Daily ETF Report Agent
+
+on:
+  schedule:
+    - cron: '0 22 * * *'  # UTC 기준 밤 11시(한국 시간 오전 7시)에 자동 실행
+  workflow_dispatch:  # 수동으로도 실행 가능
+
+jobs:
+  run-agent:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run ETF Agent
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          EMAIL_USER: ${{ secrets.EMAIL_USER }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+        run: |
+          python etf_agent.py
