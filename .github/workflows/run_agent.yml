@@ -1,10 +1,9 @@
-YAML
 name: Daily ETF Report Agent
 
 on:
   schedule:
-    - cron: '0 22 * * *'  # UTC 기준 밤 11시(한국 시간 오전 7시)에 자동 실행
-  workflow_dispatch:  # 수동으로도 실행 가능
+    - cron: '0 22 * * *'
+  workflow_dispatch:
 
 jobs:
   run-agent:
