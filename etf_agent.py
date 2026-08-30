@@ -26,7 +26,7 @@ def get_etf_data():
 def generate_report(data):
   api_key = os.environ.get("GEMINI_API_KEY")
   genai.configure(api_key=api_key)
-  model = genai.GenerativeModel("gemini-2.0-flash")
+  model = genai.GenerativeModel("gemini-3.6-flash")
 
   prompt = f"""
     다음은 주요 ETF의 최근 가격 동향 데이터입니다:
